@@ -31,10 +31,11 @@ export class MyStack extends cdk.Stack {
       billingMode: BillingMode.PAY_PER_REQUEST,
       tableClass: TableClass.STANDARD_INFREQUENT_ACCESS,
       tableName: 'stores',
+      removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
     const nodejsProps: NodejsFunctionProps = {
-      depsLockFilePath: join(__dirname, '..', 'lambda', 'package-lock.json'),
+      depsLockFilePath: join(__dirname, '..', 'package-lock.json'),
       environment: {
         STORE_PRIMARY_KEY: 'id',
         STORE_TABLE_NAME: storesTable.tableName,
@@ -84,5 +85,7 @@ export class MyStack extends cdk.Stack {
     singleStore.addMethod('GET', getOneIntegration);
     singleStore.addMethod('PATCH', updateOneIntegration);
     singleStore.addMethod('DELETE', deleteOneIntegration);
+    
+    new cdk.CfnOutput(this, 'apiUrl', {value: api.url});
   }
 }
