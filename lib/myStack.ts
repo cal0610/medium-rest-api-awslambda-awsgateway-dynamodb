@@ -34,7 +34,7 @@ export class MyStack extends cdk.Stack {
     });
 
     const nodejsProps: NodejsFunctionProps = {
-      depsLockFilePath: join(__dirname, '..', 'lambda', 'package-lock.json'),
+      depsLockFilePath: join(__dirname, '..', 'package-lock.json'),
       environment: {
         STORE_PRIMARY_KEY: 'id',
         STORE_TABLE_NAME: storesTable.tableName,
@@ -84,5 +84,7 @@ export class MyStack extends cdk.Stack {
     singleStore.addMethod('GET', getOneIntegration);
     singleStore.addMethod('PATCH', updateOneIntegration);
     singleStore.addMethod('DELETE', deleteOneIntegration);
+    
+    new cdk.CfnOutput(this, 'apiUrl', {value: api.url});
   }
 }
