@@ -10,7 +10,8 @@
     "test": "jest",
     "cdk": "cdk",
     "diff": "export AWS_PROFILE=tjx-label && cdk diff",
-    "deploy": "export AWS_PROFILE=tjx-label && cdk deploy"
+    "deploy": "export AWS_PROFILE=tjx-label && cdk deploy",
+    "destroy": "export AWS_PROFILE=tjx-label && cdk destroy"
   },
   "devDependencies": {
     "@types/jest": "^27.5.2",
